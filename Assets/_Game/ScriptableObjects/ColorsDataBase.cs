@@ -6,4 +6,9 @@ using UnityEngine;
 public class ColorsDataBase : ScriptableObject
 {
     [SerializeField] private List<Material> _colorsList;
+
+    public Material GetColoredMaterialAtIndex(int index)
+    {
+        return _colorsList[index];
+    }
 }
