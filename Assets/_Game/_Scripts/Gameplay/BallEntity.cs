@@ -35,6 +35,7 @@ public class BallEntity : MonoBehaviour, IPointerDownHandler//,IPointerClickHand
     {
         if (!canSelect || Input.touchCount > 1) return;
         DeActivate();
+        AudioManager.instance.PlaySFX(AudioID.BallClickSFX);
         GlobalEventHandler.OnBallEntitySelected?.Invoke(this);
     }
     public void ShrinkAndDestroy()

@@ -144,6 +144,7 @@ public class MatchingAreaManager : MonoBehaviour
                 GlobalEventHandler.RequestToCheckAllBallsCleared?.Invoke();
             });
         }
+        AudioManager.instance.PlaySFX(AudioID.BallMatchSFX);
         MyUtils.DelayedCallback(0.12f, () =>
         {
             if (!_ballHolders[meanIndex].ShowBlastEffect())

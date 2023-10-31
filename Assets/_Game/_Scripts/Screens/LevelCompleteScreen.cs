@@ -7,9 +7,12 @@ public class LevelCompleteScreen : PopupBase
 {
     public void OnClickNext()
     {
-        ScreenManager.Instance.RemoveAllScreens(() =>
+        ScreenManager.Instance.CloseLastAdditiveScreen(() =>
         {
-            ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+            ScreenManager.Instance.RemoveAllScreens(() =>
+            {
+                ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+            });
         });
     }
 }

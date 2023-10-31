@@ -8,9 +8,12 @@ public class OutOfSpaceScreen : PopupBase
 
     public void OnClickTryAgain()
     {
-        ScreenManager.Instance.RemoveAllScreens(() =>
+        ScreenManager.Instance.CloseLastAdditiveScreen(() =>
         {
-            ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+            ScreenManager.Instance.RemoveAllScreens(() =>
+            {
+                ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+            });
         });
     }
 
