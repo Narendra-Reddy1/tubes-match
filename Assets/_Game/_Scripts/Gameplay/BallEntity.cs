@@ -30,6 +30,11 @@ public class BallEntity : MonoBehaviour, IPointerDownHandler//,IPointerClickHand
         transform.DOKill();
     }
 
+    public void ToggleTrail(bool toggle)
+    {
+        _trailRenderer.enabled = toggle;
+    }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {

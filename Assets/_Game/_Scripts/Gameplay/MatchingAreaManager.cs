@@ -48,7 +48,7 @@ public class MatchingAreaManager : MonoBehaviour
         {
             TweenToBottomCollection(entity, _ballHolders[_index].holder.position, 0.2f, () =>
             {
-
+                entity.ToggleTrail(false); 
                 if (isMatchFound)
                     ShowObjectMatchAnimation(matchedObjects, matchedObjectIndices);
                 else
