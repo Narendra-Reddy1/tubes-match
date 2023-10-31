@@ -267,8 +267,8 @@ namespace BenStudios.ScreenManagement
             {
                 await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
             }
-            if (ReferenceEquals(m_CanvasParent, null) ? false : (m_CanvasParent ? false : true))
-                m_CanvasParent = GetCanvasTransform();
+            //if (ReferenceEquals(m_CanvasParent, null) ? false : (m_CanvasParent ? false : true))
+            //    m_CanvasParent = GetCanvasTransform();
 
             m_Screens[newScreen].Instantiate(m_CanvasParent, false, (status) =>
             {

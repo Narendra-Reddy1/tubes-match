@@ -121,7 +121,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6648512550821568823}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2720922253206439096}
+        m_TargetAssemblyTypeName: LevelCompleteScreen, Assembly-CSharp
+        m_MethodName: OnClickNext
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &524152269524923918
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +298,7 @@ GameObject:
   - component: {fileID: 4741937762998186131}
   - component: {fileID: 5990976304191285623}
   - component: {fileID: 5540030835061831034}
+  - component: {fileID: 6677108592331795592}
   m_Layer: 5
   m_Name: TransparentBG
   m_TagString: Untagged
@@ -351,6 +364,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &6677108592331795592
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2867251462066595026}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4478144176306179167
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,6 +562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57789bcbc554b545a326f443f371432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupPanel: {fileID: 329484853994551379}
+  transparentBGCanvasGroup: {fileID: 6677108592331795592}
+  popupPanelCanvasGroup: {fileID: 40739382619972644}
 --- !u!1 &6849176113847032848
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 329484853994551379}
+  - component: {fileID: 40739382619972644}
   m_Layer: 5
   m_Name: Popup
   m_TagString: Untagged
@@ -748,6 +777,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &40739382619972644
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593673042898759949}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8603684707208027678
 GameObject:
   m_ObjectHideFlags: 0

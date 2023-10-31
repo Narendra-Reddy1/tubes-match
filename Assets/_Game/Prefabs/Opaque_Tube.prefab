@@ -390,7 +390,7 @@ Transform:
   - {fileID: 2145195813490734487}
   - {fileID: 6698476120267093062}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7782883513405327365
 MonoBehaviour:
@@ -405,11 +405,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ballPrefab: {fileID: 5597374747876476580, guid: 21ca14a9c4271bf4ebc12cfdb249ae6a, type: 3}
+  _colorsDatabase: {fileID: 11400000, guid: d78d7b0992be08e4fa330c37fa3ecdff, type: 2}
   _sphereBallsParent: {fileID: 6268138753175567086}
   _tweenPose: {fileID: 2145195813490734487}
-  _capacityOfTheTube: 3
-  _sizeOfTheTube: 6
-  _colorsDatabase: {fileID: 11400000, guid: d78d7b0992be08e4fa330c37fa3ecdff, type: 2}
   _ballCountTxt: {fileID: 4650073357943464701}
   _tubeBallHolders:
   - holder: {fileID: 9151341085780706649}
@@ -421,6 +419,9 @@ MonoBehaviour:
   - holder: {fileID: 5201780569079709976}
     referencedEntity: {fileID: 0}
     isOccupied: 0
+  _capacityOfTheTube: 3
+  _sizeOfTheTube: 6
+  _index: 2
 --- !u!1 &2661275192097262396
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,8 +945,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287401100
-  m_fontColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+    rgba: 4278848010
+  m_fontColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

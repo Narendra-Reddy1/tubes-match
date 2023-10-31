@@ -33,7 +33,7 @@ public class BallEntity : MonoBehaviour, IPointerDownHandler//,IPointerClickHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!canSelect) return;
+        if (!canSelect || Input.touchCount > 1) return;
         DeActivate();
         GlobalEventHandler.OnBallEntitySelected?.Invoke(this);
     }

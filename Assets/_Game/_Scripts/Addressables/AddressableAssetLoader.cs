@@ -18,11 +18,7 @@ public class AddressableAssetLoader : AddressableAssetLocationsLoader
     [SerializeField]
     private List<string> assetlables =
            new List<string>() {
-            //"Scene",
-            //"Prefab",
-                   //"Texture",
-                   //"Material",
-                   // "Model"
+           
                    "preload"
            };
     private ConcurrentDictionary<string, AsyncOperationHandle<SceneInstance>> sceneDictionAry = new ConcurrentDictionary<string, AsyncOperationHandle<SceneInstance>>();

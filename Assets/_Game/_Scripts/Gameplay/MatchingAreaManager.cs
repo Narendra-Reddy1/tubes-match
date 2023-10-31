@@ -7,7 +7,7 @@ public class MatchingAreaManager : MonoBehaviour
 {
     [SerializeField] private List<BallHolder> _ballHolders;
     [SerializeField] private ParticleSystem _backupParticleEffect;
-    
+
 
     private List<BallEntity> _collectedEntities = new List<BallEntity>();
     private int _index = 0;
@@ -21,7 +21,6 @@ public class MatchingAreaManager : MonoBehaviour
         GlobalEventHandler.OnBallEntitySelected -= Callback_On_Ball_Selected;
     }
 
-
     private void AddObjectToBottomCollection(BallEntity entity)
     {
         _index = GetIndexForEntry(entity);
@@ -30,40 +29,34 @@ public class MatchingAreaManager : MonoBehaviour
             Debug.LogError($"INDEX IS INVALID");
             return;
         }
-
-        //DeftouchUtils.Log($"$${entity.gameObject.name} : Index: {index}");
         if (_index != _collectedEntities.Count)
             RearrangeObjectsOnInsert(_index);
         _ballHolders[_index].SetDataFromEntity(entity);
-        //entity.DisableInteraction();
+
 
 
         List<int> matchedObjectIndices = new List<int>();
         List<BallEntity> matchedObjects = new List<BallEntity>();
 
-
-
-        //int layerIndex = LayerMask.NameToLayer(collectedObjectsLayer);
-        //entity.gameObject.layer = layerIndex;
-        //entity.transform.GetChild(0).gameObject.layer = layerIndex;
         _collectedEntities.Insert(_index, entity);
 
-        //DeftEventHandler.TriggerEvent(EventID.REQUEST_OBJECT_ENTITY_ANIMATION_RESET);
         ShowRearrangeAnimation();
 
-        //DeftEventHandler.TriggerEvent(EventID.EVENT_OBJECT_ADDED_TO_BOTTOM_COLLECTION, null);
 
         bool isMatchFound = CheckForTripleMatch(entity, matchedObjects, matchedObjectIndices);
         entity.TweenToTheTop(() =>
         {
             TweenToBottomCollection(entity, _ballHolders[_index].holder.position, 0.2f, () =>
             {
-                // entity.transform.DOScale(Vector3.one, .1f).SetUpdate(true);
+
                 if (isMatchFound)
                     ShowObjectMatchAnimation(matchedObjects, matchedObjectIndices);
                 else
+                {
+                    ShowRearrangeAnimation();
                     CheckForDefeat();
-                //DeftEventHandler.TriggerEvent(EventID.REQUEST_OBJECT_ENTITY_ANIMATION);
+                }
+
             });
         });
 
@@ -80,18 +73,15 @@ public class MatchingAreaManager : MonoBehaviour
             if (x.Id.Equals(matchID))
                 counter++;
         });
-        if (counter < 3)
+        if (counter < Konstants.MIN_BALLS_TO_MATCH)
         {
             return matchFound;
         }
         matchFound = true;
-        counter = 3;
+        counter = Konstants.MIN_BALLS_TO_MATCH;
 
         matchedObjects.Clear();
         matchedObjectIndices.Clear();
-        //Removing From Object Holders
-        //matchedObjects.Capacity = DeftouchConfig.MIN_OBJECTS_TO_MATCH;
-        // matchedObjectIndices.Capacity = DeftouchConfig.MIN_OBJECTS_TO_MATCH;
         matchedObjects.Add(newlyAddedEntity);
         matchedObjectIndices.Add(_collectedEntities.IndexOf(newlyAddedEntity));
         for (int i = 0; i < _collectedEntities.Count; i++)
@@ -110,13 +100,6 @@ public class MatchingAreaManager : MonoBehaviour
             _collectedEntities.Remove(obj);
             _ballHolders.Find(x => x.id.Equals(matchID)).ResetHolder();
         }
-
-        //DeftEventHandler.TriggerEvent(EventID.EVENT_ON_MATCH_FOUND, matchedObjects);
-        //if (IsBottomCollectionEmty())
-        //{
-        //    if (GlobalVariables.HighestUnlockedLevel != 1)
-        //        DeftouchUtils.DelayedCallback(1.5f, () => { DeftEventHandler.TriggerEvent(EventID.EVENT_ON_BOTTOM_COLLECTION_EMPTY); });//dummy delay
-        //}
         RearrangeObjectsOnDeletion(matchedObjectIndices.Min());
         return matchFound;
     }
@@ -158,15 +141,15 @@ public class MatchingAreaManager : MonoBehaviour
                 entity.ShrinkAndDestroy();
                 matchedObjects.Remove(entity);
                 ShowRearrangeAnimation();
+                GlobalEventHandler.RequestToCheckAllBallsCleared?.Invoke();
             });
-        } 
+        }
         MyUtils.DelayedCallback(0.12f, () =>
         {
             if (!_ballHolders[meanIndex].ShowBlastEffect())
             {
                 ShowBackupParticleEffect(meanIndex);
             }
-            //DeftEventHandler.TriggerEvent(EventID.REQUEST_STARS_EFFECT, uiObjectHolders[meanIndex].starsParticleSystem);
         });
     }
     private void ShowBackupParticleEffect(int index)
@@ -183,7 +166,7 @@ public class MatchingAreaManager : MonoBehaviour
         {
             meanIndex += i;
         }
-        return (meanIndex / 3);
+        return (meanIndex / Konstants.MIN_BALLS_TO_MATCH);
     }
     private void RearrangeObjectsOnInsert(int startIndex = 1)
     {
@@ -204,7 +187,7 @@ public class MatchingAreaManager : MonoBehaviour
     {
         _ballHolders[newIndex].SetDataFromEntity(_ballHolders[oldIndex].objectEntity);
         _ballHolders[oldIndex].ResetHolder();
-        Debug.Log($"!! Indices From : old: {oldIndex} new: {newIndex} name: {_ballHolders[newIndex].objectEntity.name}");
+        MyUtils.Log($"!! Indices From : old: {oldIndex} new: {newIndex} name: {_ballHolders[newIndex].objectEntity.name}");
     }
 
     private void TweenToBottomCollection(BallEntity entity, Vector3 pose, float duration = 0.35f, System.Action onComplete = null)
@@ -223,7 +206,7 @@ public class MatchingAreaManager : MonoBehaviour
             index = _collectedEntities.Count;
         else if (index >= _collectedEntities.Count)
         {
-            Debug.Log($"Collection is full: {_collectedEntities.Count}");
+            MyUtils.Log($"Collection is full: {_collectedEntities.Count}");
             index = -1;
         }
         return index;
@@ -231,7 +214,7 @@ public class MatchingAreaManager : MonoBehaviour
 
     private void Callback_On_Ball_Selected(BallEntity selectedEntity)
     {
-        Debug.Log($"{selectedEntity.name} is selected...");
+        MyUtils.Log($"{selectedEntity.name} is selected...");
 
         if (_collectedEntities.Count >= _ballHolders.Count)
         {

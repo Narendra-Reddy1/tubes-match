@@ -1,18 +1,21 @@
+using BenStudios.ScreenManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OutOfSpaceScreen : MonoBehaviour
+public class OutOfSpaceScreen : PopupBase
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void OnClickTryAgain()
     {
-        
+        ScreenManager.Instance.RemoveAllScreens(() =>
+        {
+            ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+        });
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickPlayOn()
     {
-        
+
     }
 }

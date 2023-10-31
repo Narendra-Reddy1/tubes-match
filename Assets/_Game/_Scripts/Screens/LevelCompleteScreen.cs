@@ -1,18 +1,15 @@
+using BenStudios.ScreenManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelCompleteScreen : MonoBehaviour
+public class LevelCompleteScreen : PopupBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnClickNext()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ScreenManager.Instance.RemoveAllScreens(() =>
+        {
+            ScreenManager.Instance.ChangeScreen(Window.GameplayScreen, isUIObject: false);
+        });
     }
 }

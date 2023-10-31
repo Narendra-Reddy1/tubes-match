@@ -59,7 +59,10 @@ public class TubeHandler : MonoBehaviour
         _removedBallCount++;
         _UpdateBallsCount(_sizeOfTheTube - _removedBallCount);
     }
-
+    public bool IsTubeEmpty()
+    {
+        return (_sizeOfTheTube - _removedBallCount) == 0;
+    }
     public void TweenToTopPose(BallEntity entity, System.Action onComplete = null)
     {
         entity.transform.DOMove(_tweenPose.position, .2f).onComplete += () =>
