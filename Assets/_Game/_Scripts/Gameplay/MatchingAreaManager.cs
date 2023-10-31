@@ -181,7 +181,7 @@ public class MatchingAreaManager : MonoBehaviour
     {
         foreach (BallHolder entityHolder in _ballHolders)
             if (entityHolder.isOccupied)
-                TweenToBottomCollection(entityHolder.objectEntity, entityHolder.holder.position, 0.1f);
+                TweenToBottomCollection(entityHolder.objectEntity, entityHolder.holder.position, 0.2f);
     }
     private void AddObjectsToNewIndex(int oldIndex, int newIndex)
     {

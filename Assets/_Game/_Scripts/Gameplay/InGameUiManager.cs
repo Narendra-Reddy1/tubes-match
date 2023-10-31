@@ -23,7 +23,10 @@ public class InGameUiManager : MonoBehaviour
     }
     private void ShowLevelCompletePopup()
     {
-        ScreenManager.Instance.ChangeScreen(Window.LevelCompletePopup, ScreenType.Additive);
+        MyUtils.DelayedCallback(.5f, () =>
+        {
+            ScreenManager.Instance.ChangeScreen(Window.LevelCompletePopup, ScreenType.Additive);
+        });
     }
 
     private void Callback_On_Bottom_Box_Full()
